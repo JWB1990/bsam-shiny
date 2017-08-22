@@ -44,11 +44,11 @@ stepids <- reactive({
 
 begin <- reactive({
   #first the filterering argument contains the track's timesteps
-  begin <- as.character(head(mod[min(stepids()),"date"],1))
+  begin <- mod[min(stepids()),]$date
   begin
 })
 end <- reactive({
-  end <- as.character(tail(mod[max(stepids()),"date"],1))
+  end <- tail(mod[max(stepids()),],1)$date
   end
 })
 
@@ -88,6 +88,7 @@ output$end <- renderText(end())
 
     #colnames(map_df)[5]<-"var"
     #colnames(map_df)[6]<-"TSE"
+    map_df$dens[map_df$dens>input$maxdensity] <- input$maxdensity
     map_df
   })
 
@@ -135,7 +136,7 @@ observe({
 
     pal <- colorNumeric(
       palette = c("green", "red"),
-      domain = c(0,1))
+      domain = c(0,input$maxdensity))
 
     ## Map Creation
     proxy=leafletProxy("leafmap1") %>% clearGroup('model')  %>%
