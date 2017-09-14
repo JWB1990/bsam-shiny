@@ -25,18 +25,18 @@ densmod_r<- reactive({
 stepids <- reactive({
   #first the filterering argument contains the track's timesteps
   #then filter by selected timespan
-  # if(input$timespan == "sing.t"){
+  if(input$timespan == "sing.t"){
     stepids <- as.numeric(mod[mod$id == input$track_id,]$stepid)
     
   stepids <- stepids[ceiling(length(stepids)*input$track_time)]
   
-  # }
- # else if(input$timespan == "mult.ts"){
- #   stepids <- as.numeric(rownames(mod[mod$id == input$track_id,]))
- #   
- #   start=floor(length(stepids)*input$track_range[1])
- #   stepids <- stepids[start:ceiling(length(stepids)*input$track_range[2])]
- # }
+ }
+ else if(input$timespan == "mult.ts"){
+   stepids <- as.numeric(mod[mod$id == input$track_id,]$stepid)
+
+   start=floor(length(stepids)*input$track_range[1])
+   stepids <- stepids[start:ceiling(length(stepids)*input$track_range[2])]
+ }
   stepids
 })
 
