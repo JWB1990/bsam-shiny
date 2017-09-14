@@ -20,7 +20,7 @@ shinyUI(fluidPage(
     sidebarPanel(
       
       selectInput("track_id", "Select Track",
-                  choices = c(track[order(as.numeric(gsub(track,pattern="[^0-9]", replace="")))]), 
+                  choices = track, 
                   selected=track[1])
       ,
       checkboxInput("towers", "Display Towers", value=FALSE),

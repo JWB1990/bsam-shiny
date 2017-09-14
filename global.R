@@ -18,6 +18,7 @@ library(MASS)
 
 Sys.setenv(TZ='GMT')
 mod <- readRDS(file="mod_hDCRWS_revi_150K_50K_50t_1h.rds")
+mod$stepid<-1:nrow(mod)
 densmod <- readRDS(file="revi_150K_50K_2chain_spatialdensity.rds")
 birdraw <- readRDS(file="revi.rds")
 birdraw <- birdraw %>% filter(id %in% unique(mod$id))
